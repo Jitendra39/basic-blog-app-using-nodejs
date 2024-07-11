@@ -15,6 +15,10 @@ const port = process.env.PORT || 8000;
 
 //'mongodb://localhost:27017/boggers'
 mongoose.connect(process.env.MONGO_URL).then(() =>{
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 45000 
   console.log("mongodb is connected")
 })
 
