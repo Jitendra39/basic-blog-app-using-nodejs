@@ -9,14 +9,14 @@ const cookieParser = require('cookie-parser');
 const Blog = require('./models/blog.js');
 const { checkForAuthenticationCookie } = require('./middleware/authentication');
 
-const port = process.env.PORT || 8000;
+mongoose.set('debug', true);
+
+const port = process.env.PORT;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   connectTimeoutMS: 60000,
-  socketTimeoutMS: 45000 
+  socketTimeoutMS: 45000
 }).then(() => {
   console.log("MongoDB is connected");
 }).catch(err => {
@@ -42,8 +42,7 @@ app.get('/', async (req, res) => {
       blogs: allBlogs
     });
   } catch (err) {
-    console.error("Error fetching blogs:", err);
-    res.status(500).send("Internal Server Error");
+
   }
 });
 
